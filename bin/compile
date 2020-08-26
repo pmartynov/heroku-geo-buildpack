@@ -5,7 +5,7 @@
 set -e
 
 # Debug
-# set -x
+set -x
 
 # Clean up leaking environment
 unset GIT_DIR
@@ -60,6 +60,8 @@ function set-export (){
   echo "export $1=$2"
   echo "export $1=$2" >> $EXPORTS_PATH
 }
+
+tree $BUILD_DIR -af | grep libjasper
 
 # Retrieve versions
 GEOS_VERSION=$(manifest_version "geos")
@@ -117,6 +119,8 @@ set-default-env LIBRARY_PATH "$APP_VENDOR_RUNTIME/lib"
 set-default-env LD_LIBRARY_PATH "$APP_VENDOR_RUNTIME/lib"
 set-default-env CPATH "$APP_VENDOR_RUNTIME/include"
 set-default-env PATH "$APP_VENDOR_RUNTIME/bin"
+
+tree $BUILD_DIR -af | grep libjasper
 
 # Copy libjasper since it's only available in heroku buildenv
 cp /app/.apt/usr/lib/x86_64-linux-gnu/libjasper.so* "$BUILD_DIR/$TARGET_VENDOR_DIR/lib/."
