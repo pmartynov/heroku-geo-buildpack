@@ -120,10 +120,8 @@ set-default-env LD_LIBRARY_PATH "$APP_VENDOR_RUNTIME/lib"
 set-default-env CPATH "$APP_VENDOR_RUNTIME/include"
 set-default-env PATH "$APP_VENDOR_RUNTIME/bin"
 
-tree $BUILD_DIR -af | grep libjasper
-
 # Copy libjasper since it's only available in heroku buildenv
-cp /app/.apt/usr/lib/x86_64-linux-gnu/libjasper.so* "$BUILD_DIR/$TARGET_VENDOR_DIR/lib/."
+cp $BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/libjasper.so* "$BUILD_DIR/$TARGET_VENDOR_DIR/lib/."
 
 # Bundle workaround
 mkdir -p $BUILD_DIR/.bundle
